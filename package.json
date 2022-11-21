@@ -1,0 +1,24 @@
+{
+  "name": "node-with-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvda/node-with-typescript.git"
+  },
+  "author": "ctrl@hey.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bvda/node-with-typescript/issues"
+  },
+  "homepage": "https://github.com/bvda/node-with-typescript/blob/main/README.md",
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
+}
