@@ -18,16 +18,28 @@ app.post('/', async (req: Request, res: Response) => {
   res.json(user)
 });
 
-app.get('/:uid', (req: Request, res: Response) => {
-  res.json({});
+app.get('/:uid', async (req: Request, res: Response) => {
+  const { uid } = req.params;
+  const result = await admin.firestore().collection('user').where('uid', '==', uid).get();
+  if (!result.size) {
+    res.sendStatus(404);
+  } 
+  res.json(result.docs[0].data());
 });
 
 app.patch('/:uid', (req: Request, res: Response) => {
   res.json({})
 });
 
-app.delete('/:uid', (req: Request, res: Response) => {
-  res.json({})
+app.delete('/:uid', async (req: Request, res: Response) => {
+  const { uid } = req.params;
+  let result;
+  try {
+    result = await admin.firestore().collection('user').doc(uid).delete({ exists: true });
+  } catch(err: unknown) {
+    res.sendStatus(404);
+  } 
+  res.json(result);
 });
 
 export const users = app;
