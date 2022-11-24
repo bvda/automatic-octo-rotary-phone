@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from 'firebase-admin';
-import { hello } from "./products";
+import { hello } from "./hello";
 import { users } from "./users";
 
 admin.initializeApp();
@@ -31,3 +31,11 @@ export const userCreated = functions.firestore.document('user/{uid}').onCreate((
     timestamp: admin.firestore.Timestamp.now()
   });
 })
+
+export const clearUsers = functions.pubsub.schedule('1 * * * *').onRun(
+  (context) => {
+    functions.logger.info(`Collection 'user' cleared`, { })
+    console.log("Hello, schedule!")
+    return null;
+  }
+)
